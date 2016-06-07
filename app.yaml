@@ -1,0 +1,17 @@
+application: YOUR-APPLICATION-ID
+version: 1
+runtime: python27
+api_version: 1
+threadsafe: yes
+
+handlers:
+
+- url: /static
+  static_dir: static
+
+- url: /update_stocks
+  script: app.app
+  login: admin
+
+- url: .*
+  script: app.app

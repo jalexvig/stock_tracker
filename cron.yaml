@@ -1,0 +1,6 @@
+# This file controls how often the stock prices are updated.
+cron:
+- description: Update stocks
+  url: /update_stocks
+  schedule: every 10 minutes from 09:30 to 16:00
+  timezone: US/Eastern

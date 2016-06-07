@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+  <meta charset="UTF-8">
+  <title>Home</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='my.css') }}">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.13.0/moment.min.js"></script>
+  <script>
+    var url_create = "{{ url_for('create', _external=True) }}";
+    var url_sync = "{{ url_for('sync', _external=True) }}";
+    var url_delete = "{{ url_for('delete', _external=True) }}";
+  </script>
+  <script src="{{ url_for('static', filename='index.js') }}"></script>
+</head>
+<body>
+
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 text-right">
+      <a href="{{ url_for('settings_get', _external=True) }}">Settings</a>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-11">
+      <h2>Available sheets</h2>
+    </div>
+    <div class="col-xs-1 pull-bottom">
+      <button type="button" id="create-sheet-button" class="btn btn-primary" aria-label="Create">
+        <span class="glyphicon glyphicon-plus" aria-hidden="true"></span>
+      </button>
+    </div>
+  </div>
+  <table class="table table-striped" id="sheets-table">
+    <thead>
+    <tr>
+      <th>Sheet name</th>
+      <th>Last Synced</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for s in sheets %}
+      {% include 'sheet_row.html' %}
+    {% endfor %}
+    </tbody>
+  </table>
+  <div class="row pull-right">
+    <div class="alert alert-success" style="display:none" role="alert" id="notification-add">
+      Click the plus button to add a new sheet!
+    </div>
+    <div class="alert alert-success" style="display:none" role="alert" id="notification-edit-sync">
+      Click the pencil to edit the sheet.<br>
+      Update symbols, lower bounds, and upper bounds (but not prices).<br>
+      After you are done, make sure to sync!
+    </div>
+  </div>
+</div>
+</body>
+</html>
